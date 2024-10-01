@@ -6,6 +6,19 @@
     <title>Crear Ticket - Sistema de Tickets</title>
     <link rel="stylesheet" href="/css/crear_ticket.css">
     <script src="/js/crear_ticket.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hacer la solicitud AJAX para obtener los IDs
+            fetch('/php/get_ids.php')
+                .then(response => response.json())
+                .then(data => {
+                    // Insertar los valores en los campos del formulario
+                    document.querySelector('input[name="id-ticket"]').value = data.next_ticket_id
+                    document.querySelector('input[name="id-cliente"]').value = data.next_cliente_id
+                })
+                .catch(error => console.error('Error obteniendo los IDs:', error))
+        })
+    </script>
 </head>
 <body>
 
@@ -22,12 +35,12 @@
             </header>
             <br><br>
 
-            <form class="datos-ticket" id="datos-ticket"></form>
+            <form class="datos-ticket" id="datos-ticket" action="/php/crear_ticket.php" method="POST"></form>
                 <div class="contenedor-datos-ticket">   
                     <div class="seccion" id="campos-ticket">
                         <h1>Datos del ticket</h1>
                         <div class="campo">
-                            <input type="text" name="id-ticket" placeholder="Id ticket">
+                            <input type="text" name="id-ticket" id="id-ticket" readonly>
                             <input type="text" name="asunto-titulo" placeholder="Asunto/Título">
                             <textarea name="descripcion" placeholder="Descripción del problema"></textarea>
                             <select name="categoria">
@@ -56,7 +69,7 @@
                     <div class="seccion" id="campos-cliente">
                         <h1>Datos del cliente</h1>
                         <div class="campo">
-                            <input type="text" name="id-cliente" value="1">
+                            <input type="text" name="id-cliente" value="<?php echo $next_cliente_id; ?>" readonly>
                             <input type="text" name="nombre" placeholder="Nombre cliente">
                             <input type="email" name="email" placeholder="Email">
                             <input type="tel" name="tel" placeholder="Teléfono">
@@ -75,6 +88,10 @@
                             <textarea name="notas" placeholder="Comentarios internos"></textarea>
                         </div>
                     </div>
+                </div>
+                <div class="contenedor-boton" id="contenedor-boton">
+                    <input type="submit" id="enviar-ticket" class="btn-crear-ticket" value="Crear Ticket" name="btn-crear-ticket">
+                    <input type="button" class="btn-descartar-ticket" value="Descartar Ticket" name="btn-descartar-ticket" id="btn-descartar-ticket">
                 </div>
             </form>
         </main>

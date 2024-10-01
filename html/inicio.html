@@ -14,11 +14,11 @@
     <div class="barra-lateral" id="barra-lateral">
         <div class="contenedor-barra-lateral" id="contenedor-barra-lateral">
             <img src="/imagenes/usuario.png" alt="Logo de usuario" class="imagen-usuario">    
-            <p class="texto-usuario">Erick Corrales<br><br>Administrador</p>    
+            <p class="texto-usuario" id="texto-usuario">Erick Corrales<br><br>Administrador</p>    
             <hr class="linea-decorativa">                
             
             <ul class="menu-lateral">
-                <li><a href="#" class="menu-opcion">Crear Ticket</a></li>
+                <li><a href="crear_ticket.html" class="menu-opcion">Crear Ticket</a></li>
                 <li><a href="#" class="menu-opcion">Tickets en Progreso</a></li>
                 <li><a href="#" class="menu-opcion">Tickets Abiertos</a></li>
                 <li><a href="#" class="menu-opcion">Tickets Cerrados</a></li>
@@ -30,7 +30,6 @@
     <div class="contenedor-principal" id="contenedor-principal"> 
         <!-- Contenedor principal con los tickets -->
         <main class="main-principal" id="main-principal">
-            <br>
             <div class="contenedor-buscar">
                 <input type="text" placeholder="Buscar ticket..." class="buscar-ticket"><br>
             </div>
@@ -42,10 +41,6 @@
                     <span>Usuario: <strong>Erick Corrales</strong></span>
                 </div>
             </header>
-
-            <br><br>
-
-            <!-- Tabla de tickets -->
             <section class="tabla-tickets">
                 <table>
                     <thead>
