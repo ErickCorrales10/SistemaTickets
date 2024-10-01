@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pantalla Principal - Sistema de tickets</title>
+    <script src="/js/inicio.js"></script>
+    <link rel="stylesheet" href="/css/inicio.css">
+
+</head>
+<body>
+
+    <!-- Barra de navegación -->
+    <div class="barra-lateral" id="barra-lateral">
+        <div class="contenedor-barra-lateral" id="contenedor-barra-lateral">
+            <img src="/imagenes/usuario.png" alt="Logo de usuario" class="imagen-usuario">    
+            <p class="texto-usuario">Erick Corrales<br><br>Administrador</p>    
+            <hr class="linea-decorativa">                
+            
+            <ul class="menu-lateral">
+                <li><a href="#" class="menu-opcion">Crear Ticket</a></li>
+                <li><a href="#" class="menu-opcion">Tickets en Progreso</a></li>
+                <li><a href="#" class="menu-opcion">Tickets Abiertos</a></li>
+                <li><a href="#" class="menu-opcion">Tickets Cerrados</a></li>
+                <li><a href="#" class="menu-opcion">Cerrar Sesión</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="contenedor-principal" id="contenedor-principal"> 
+        <!-- Contenedor principal con los tickets -->
+        <main class="main-principal" id="main-principal">
+            <br>
+            <div class="contenedor-buscar">
+                <input type="text" placeholder="Buscar ticket..." class="buscar-ticket"><br>
+            </div>
+
+            <header id="header" class="header">
+                <h1>Sistema de tickets</h1>
+                <br>
+                <div class="informacion-usuario">
+                    <span>Usuario: <strong>Erick Corrales</strong></span>
+                </div>
+            </header>
+
+            <br><br>
+
+            <!-- Tabla de tickets -->
+            <section class="tabla-tickets">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>ID Ticket</th>
+                            <th>Problema</th>
+                            <th>Descripción</th>
+                            <th>Estado</th>
+                            <th>Fecha de Creación</th>
+                            <th>Fecha de Finalización</th>
+                            <th>Resuelto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="abierto">
+                            <td>Cliente A</td>
+                            <td>12345</td>
+                            <td>Error de red</td>
+                            <td>El sistema no se conecta</td>
+                            <td>Abierto</td>
+                            <td>2024-09-30</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+
+                        <tr class="en-progreso">
+                            <td>Cliente B</td>
+                            <td>67890</td>
+                            <td>Soporte técnico</td>
+                            <td>El equipo no funciona correctamente</td>
+                            <td>En progreso</td>
+                            <td>2024-09-28</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+
+                        <tr class="cerrado-no">
+                            <td>Cliente C</td>
+                            <td>123456</td>
+                            <td>Actualización de software</td>
+                            <td>El programa no funciona como debería</td>
+                            <td>Cerrado</td>
+                            <td>2024-09-25</td>
+                            <td>2024-09-28</td>
+                            <td>No</td>
+                        </tr>
+
+                        <tr class="cerrado-si">
+                            <td>Cliente D</td>
+                            <td>789012</td>
+                            <td>Reparación de hardware</td>
+                            <td>El monitor no funciona correctamente</td>
+                            <td>Cerrado</td>
+                            <td>2024-09-22</td>
+                            <td>2024-09-25</td>
+                            <td>Si</td>
+                        </tr>>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+    
+</body>
+</html>

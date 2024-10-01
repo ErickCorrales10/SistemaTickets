@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Ticket - Sistema de Tickets</title>
+    <link rel="stylesheet" href="/css/crear_ticket.css">
+    <script src="/js/crear_ticket.js"></script>
+</head>
+<body>
+
+    <div class="contenedor-principal" id="contenedor-principal"> 
+        <!-- Contenedor principal con los tickets -->
+        <main class="main-principal" id="main-principal">
+            <br>
+            <header id="header" class="header">
+                <h1>Crear ticket</h1>
+                <br>
+                <div class="informacion-usuario">
+                    <span>Usuario: <strong>Erick Corrales</strong></span>
+                </div>
+            </header>
+            <br><br>
+
+            <form class="datos-ticket" id="datos-ticket"></form>
+                <div class="contenedor-datos-ticket">   
+                    <div class="seccion" id="campos-ticket">
+                        <h1>Datos del ticket</h1>
+                        <div class="campo">
+                            <input type="text" name="id-ticket" placeholder="Id ticket">
+                            <input type="text" name="asunto-titulo" placeholder="Asunto/Título">
+                            <textarea name="descripcion" placeholder="Descripción del problema"></textarea>
+                            <select name="categoria">
+                                <option value="" disabled selected>Seleccione una categoría</option>
+                                <option value="conectividad">Problemas de conectividad</option>
+                                <option value="configuracion">Errores de configuración</option>
+                                <option value="hardware">Problemas de hardware</option>
+                                <option value="software">Errores de software</option>
+                                <option value="matenimiento">Solicitud de mantenimiento</option>
+                                <option value="seguridad">Problemas de seguridad</option>
+                                <option value="otros">Otros problemas</option>
+                            </select>
+                            <select name="prioridad">
+                                <option value="" disabled selected>Seleccione una prioridad</option>
+                                <option value="alta">Alta</option>
+                                <option value="media">Media</option>
+                                <option value="baja">Baja</option>
+                            </select>
+                            <input type="text" name="estado" value="Abierto">
+                            <label for="fecha-creacion" class="fecha-creacion">Fecha de creación</label>
+                            <input type="date" name="fecha-creacion" id="fecha-creacion">
+                            <label for="fecha-resolucion" class="fecha-resolucion">Fecha de resolución</label>
+                            <input type="date" name="fecha-resolucion" id="fecha-resolucion">                    
+                        </div>
+                    </div>
+                    <div class="seccion" id="campos-cliente">
+                        <h1>Datos del cliente</h1>
+                        <div class="campo">
+                            <input type="text" name="id-cliente" value="1">
+                            <input type="text" name="nombre" placeholder="Nombre cliente">
+                            <input type="email" name="email" placeholder="Email">
+                            <input type="tel" name="tel" placeholder="Teléfono">
+                        </div>
+                    </div>
+                    <div class="seccion" id="asignacion-seguimiento">
+                        <h1>Asignación y Seguimiento</h1>
+                        <div class="campo">
+                            <input type="text" name="asignado" placeholder="Asginado a ...">
+                            <input type="text" name="departamento" placeholder="Departamento">
+                        </div>
+                    </div>
+                    <div class="seccion" id="notas-internas">
+                        <h1>Notas Internas</h1>
+                        <div class="campo">
+                            <textarea name="notas" placeholder="Comentarios internos"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </main>
+    </div>
+    
+</body>
+</html>
