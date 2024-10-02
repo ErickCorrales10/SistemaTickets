@@ -19,6 +19,19 @@
                 .catch(error => console.error('Error obteniendo los IDs:', error))
         })
     </script>
+
+    <!-- <script>
+        function getQueryParameter(name) {
+            const urlparams = new URLSearchParams(window.location.search)
+            return urlparams.get(name)
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            if(getQueryParameter('ticket_created') === 'true') {
+                alert("El ticket ses guardó correctamente.")
+            }
+        }, false)
+    </script> -->
 </head>
 <body>
 
@@ -35,7 +48,7 @@
             </header>
             <br><br>
 
-            <form class="datos-ticket" id="datos-ticket" action="/php/crear_ticket.php" method="POST"></form>
+            <form class="datos-ticket" id="datos-ticket" action="/php/crear_ticket.php" method="POST">
                 <div class="contenedor-datos-ticket">   
                     <div class="seccion" id="campos-ticket">
                         <h1>Datos del ticket</h1>
@@ -69,7 +82,6 @@
                     <div class="seccion" id="campos-cliente">
                         <h1>Datos del cliente</h1>
                         <div class="campo">
-                            <input type="text" name="id-cliente" value="<?php echo $next_cliente_id; ?>" readonly>
                             <input type="text" name="nombre" placeholder="Nombre cliente">
                             <input type="email" name="email" placeholder="Email">
                             <input type="tel" name="tel" placeholder="Teléfono">

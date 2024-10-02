@@ -22,16 +22,6 @@
         $next_ticket_id = 1; // Si no hay tickets, el siguiente será el 1
     }
 
-    // Consultar el último ID de la tabla de clientes
-    $sql_last_cliente = "SELECT id_cliente FROM clientes ORDER BY id_cliente DESC LIMIT 1";
-    $result_cliente = $conn->query($sql_last_cliente);
-    if ($result_cliente->num_rows > 0) {
-        $row_cliente = $result_cliente->fetch_assoc();
-        $next_cliente_id = $row_cliente['id_cliente'] + 1;
-    } else {
-        $next_cliente_id = 1; // Si no hay clientes, el siguiente será el 1
-    }
-
     // Obtener los datos del formulario
     $asunto = $_POST['asunto-titulo'];
     $descripcion = $_POST['descripcion'];
@@ -40,7 +30,6 @@
     $estado = $_POST['estado'];
     $fecha_creacion = $_POST['fecha-creacion'];
     $fecha_resolucion = $_POST['fecha-resolucion'];
-    $id_cliente = $_POST['id-cliente']; // Puedes validar que el cliente existe primero
     $nombre_cliente = $_POST['nombre'];
     $email_cliente = $_POST['email'];
     $telefono_cliente = $_POST['tel'];
@@ -60,7 +49,6 @@
 
     if ($conn->query($sql_ticket) === TRUE) {
         $ticket_id = $conn->insert_id; // Obtener el ID del ticket recién insertado
-
         // Insertar datos en la tabla de asignación
         $sql_asignacion = "INSERT INTO asignaciones_seguimiento (id_ticket, asignado_a, departamento) VALUES ('$ticket_id', '$asignado', '$departamento')";
         if($conn->query($sql_asignacion) === TRUE) {
@@ -78,6 +66,9 @@
         }
 
         echo "Ticket creado exitosamente";
+
+        header('Location: /html/inicio.php');
+        exit();
     }else {
         echo "Error al crear el ticket: " . $conn->error . "<br>";
     }

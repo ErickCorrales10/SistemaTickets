@@ -18,7 +18,7 @@ document.getElementById('login-form').addEventListener('submit', function(event)
     .then(data => {
         // Maneja la respuesta del servidor
         if (data.includes("Inicio de sesión exitoso")) {
-            window.location.href = '/html/inicio.html' // Redirigir a la página principal
+            window.location.href = '/html/inicio.php' // Redirigir a la página principal
         } else {
             alert('Error: Inicio de sesión fallida')
             document.getElementById('mensaje-error').innerText = data // Muestra el mensaje de error
