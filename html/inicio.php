@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,10 +20,11 @@
             
             <ul class="menu-lateral">
                 <li><a href="crear_ticket.html" class="menu-opcion">Crear Ticket</a></li>
-                <li><a href="#" class="menu-opcion">Tickets en Progreso</a></li>
-                <li><a href="#" class="menu-opcion">Tickets Abiertos</a></li>
-                <li><a href="#" class="menu-opcion">Tickets Cerrados</a></li>
-                <li><a href="#" class="menu-opcion">Cerrar Sesión</a></li>
+                <li><a href="#" class="menu-opcion" id="mostrar-todos">Mostrar Todos</a></li>
+                <li><a href="#" class="menu-opcion" id="tickets-en-progreso">Tickets en Progreso</a></li>
+                <li><a href="#" class="menu-opcion" id="tickets-abiertos">Tickets Abiertos</a></li>
+                <li><a href="#" class="menu-opcion" id="tickets-cerrados">Tickets Cerrados</a></li>
+                <li><a href="#" class="menu-opcion" id="cerrar-sesion">Cerrar Sesión</a></li>
             </ul>
         </div>
     </div>

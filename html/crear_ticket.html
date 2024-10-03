@@ -19,19 +19,6 @@
                 .catch(error => console.error('Error obteniendo los IDs:', error))
         })
     </script>
-
-    <!-- <script>
-        function getQueryParameter(name) {
-            const urlparams = new URLSearchParams(window.location.search)
-            return urlparams.get(name)
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            if(getQueryParameter('ticket_created') === 'true') {
-                alert("El ticket ses guardó correctamente.")
-            }
-        }, false)
-    </script> -->
 </head>
 <body>
 
@@ -54,9 +41,9 @@
                         <h1>Datos del ticket</h1>
                         <div class="campo">
                             <input type="text" name="id-ticket" id="id-ticket" readonly>
-                            <input type="text" name="asunto-titulo" placeholder="Asunto/Título">
-                            <textarea name="descripcion" placeholder="Descripción del problema"></textarea>
-                            <select name="categoria">
+                            <input type="text" name="asunto-titulo" placeholder="Asunto/Título" required>
+                            <textarea name="descripcion" placeholder="Descripción del problema" required></textarea>
+                            <select name="categoria" required>
                                 <option value="" disabled selected>Seleccione una categoría</option>
                                 <option value="conectividad">Problemas de conectividad</option>
                                 <option value="configuracion">Errores de configuración</option>
@@ -66,13 +53,13 @@
                                 <option value="seguridad">Problemas de seguridad</option>
                                 <option value="otros">Otros problemas</option>
                             </select>
-                            <select name="prioridad">
+                            <select name="prioridad" required>
                                 <option value="" disabled selected>Seleccione una prioridad</option>
                                 <option value="alta">Alta</option>
                                 <option value="media">Media</option>
                                 <option value="baja">Baja</option>
                             </select>
-                            <input type="text" name="estado" value="Abierto">
+                            <input type="text" name="estado" value="Abierto" required>
                             <label for="fecha-creacion" class="fecha-creacion">Fecha de creación</label>
                             <input type="date" name="fecha-creacion" id="fecha-creacion">
                             <label for="fecha-resolucion" class="fecha-resolucion">Fecha de resolución</label>
@@ -82,9 +69,9 @@
                     <div class="seccion" id="campos-cliente">
                         <h1>Datos del cliente</h1>
                         <div class="campo">
-                            <input type="text" name="nombre" placeholder="Nombre cliente">
-                            <input type="email" name="email" placeholder="Email">
-                            <input type="tel" name="tel" placeholder="Teléfono">
+                            <input type="text" name="nombre" placeholder="Nombre cliente" required>
+                            <input type="email" name="email" placeholder="Email" required>
+                            <input type="tel" name="tel" placeholder="Teléfono" required>
                         </div>
                     </div>
                     <div class="seccion" id="asignacion-seguimiento">
