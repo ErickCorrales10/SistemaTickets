@@ -4,9 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Ticket - Sistema de Tickets</title>
+
+        <!-- Enlace al archivo CSS para los estilos del formulario -->
     <link rel="stylesheet" href="/css/crear_ticket.css">
+
+        <!-- Enlace al archivo JavaScript para funcionalidades adicionales -->
     <script src="/js/crear_ticket.js"></script>
     <script>
+
+                // Evento que se ejecuta cuando el DOM está completamente cargado
         document.addEventListener('DOMContentLoaded', function() {
             // Hacer la solicitud AJAX para obtener los IDs
             fetch('/php/get_ids.php')
@@ -26,6 +32,8 @@
         <!-- Contenedor principal con los tickets -->
         <main class="main-principal" id="main-principal">
             <br>
+
+            <!-- Encabezado del formulario con el título y la información del usuario -->
             <header id="header" class="header">
                 <h1>Crear ticket</h1>
                 <br>
@@ -35,6 +43,7 @@
             </header>
             <br><br>
 
+            <!-- Formulario para la creación de tickets, que se envía al servidor mediante POST -->
             <form class="datos-ticket" id="datos-ticket" action="/php/crear_ticket.php" method="POST">
                 <div class="contenedor-datos-ticket">   
                     <div class="seccion" id="campos-ticket">
@@ -88,6 +97,8 @@
                         </div>
                     </div>
                 </div>
+                
+                <!-- Botones para crear o descartar el ticket -->
                 <div class="contenedor-boton" id="contenedor-boton">
                     <input type="submit" id="enviar-ticket" class="btn-crear-ticket" value="Crear Ticket" name="btn-crear-ticket">
                     <input type="button" class="btn-descartar-ticket" value="Descartar Ticket" name="btn-descartar-ticket" id="btn-descartar-ticket">

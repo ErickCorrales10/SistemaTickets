@@ -4,27 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Sistema de tickets</title>
+    <!-- Archivo de CSS para el estilo de la pantalla de login -->
     <link rel="stylesheet" href="/css/login.css">
-    <!-- <script src="/js/login.js"></script> -->
 </head>
 <body>
+    <!-- Contenedor principal del login -->
     <div class="contenedor-login">
         <div class="login">
             <div class="logo-usuario">
                 <img src="/imagenes/logo.png" alt="Logo de usuario" width="150" height="150">
             </div>
             <h2>Iniciar sesión</h2>
+
+            <!-- Formulario de inicio de sesión -->
             <form action="/php/login.php" method="POST" id="login-form">
+                <!-- Campos del formulario para el nombre de usuario y la contraseña -->
                 <div class="input-form">
                     <input type="text" name="nombre-usuario" required placeholder="Usuario o email" id="nombre-usuario">
                 <br><br>
                     <input type="password" name="contrasena" required placeholder="Contraseña" id="contrasena">
                 </div>
                 <br><br>
+                <!-- Botón para enviar el formulario -->
                 <button type="submit" class="boton-enviar">Ingresar</button>
             </form>
         </div>
     </div>
+    
+    <!-- Archivo de JavaScript para funcionalidades adicionales de la página de login -->
     <script src="/js/login.js"></script>
 </body>
 </html>

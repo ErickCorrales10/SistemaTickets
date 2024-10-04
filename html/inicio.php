@@ -5,7 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pantalla Principal - Sistema de tickets</title>
+
+        <!-- Archivo de JavaScript para la pantalla de inicio -->
     <script src="/js/inicio.js"></script>
+
+    <!-- Archivo de CSS para el estilo de la pantalla de inicio -->
     <link rel="stylesheet" href="/css/inicio.css">
 
 </head>
@@ -18,7 +22,9 @@
             <p class="texto-usuario" id="texto-usuario">Erick Corrales<br><br>Administrador</p>    
             <hr class="linea-decorativa">                
             
+            <!-- Menú de navegación en la barra lateral -->
             <ul class="menu-lateral">
+                <!-- Enlaces a diferentes secciones del sistema -->
                 <li><a href="crear_ticket.html" class="menu-opcion">Crear Ticket</a></li>
                 <li><a href="#" class="menu-opcion" id="mostrar-todos">Mostrar Todos</a></li>
                 <li><a href="#" class="menu-opcion" id="tickets-en-progreso">Tickets en Progreso</a></li>
@@ -29,20 +35,26 @@
         </div>
     </div>
 
+    <!-- Contenedor principal que muestra el contenido de los tickets -->
     <div class="contenedor-principal" id="contenedor-principal"> 
         <!-- Contenedor principal con los tickets -->
         <main class="main-principal" id="main-principal">
+            <!-- Campo de búsqueda para encontrar tickets -->
             <div class="contenedor-buscar">
                 <input type="text" placeholder="Buscar ticket..." class="buscar-ticket"><br>
             </div>
 
+            <!-- Cabecera principal con el título del sistema -->
             <header id="header" class="header">
                 <h1>Sistema de tickets</h1>
                 <br>
+                <!-- Información del usuario logueado -->
                 <div class="informacion-usuario">
                     <span>Usuario: <strong>Erick Corrales</strong></span>
                 </div>
             </header>
+
+            <!-- Tabla que muestra los tickets -->
             <section class="tabla-tickets">
                 <table>
                     <thead>
@@ -65,6 +77,7 @@
                         $password = "";
                         $dbname = "sistema_tickets"; 
 
+                        // Crear conexión a la base de datos
                         $conn = new mysqli($servername, $username, $password, $dbname);
 
                         // Verificar la conexión
@@ -81,6 +94,7 @@
                         // Mostrar los tickets en la tabla
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
+                                // Definir la clase CSS para cada fila según el estado del ticket
                                 if(strtolower($row['estado']) == "abierto")
                                     $clase = "abierto";
                                 else if(strtolower($row['estado']) == "cerrado"
@@ -94,6 +108,7 @@
                                 else
                                     $clase = "";
 
+                                // Imprimir una fila de la tabla con los datos del ticket
                                 echo "<tr class='" . htmlspecialchars($clase) . "'>
                                         <td>" . htmlspecialchars($row['nombre_cliente']) . "</td>
                                         <td>" . htmlspecialchars($row['id_ticket']) . "</td>
@@ -106,6 +121,7 @@
                                         </tr>";
                             }
                         } else {
+                            // Si no hay tickets disponibles, mostrar un mensaje
                             echo "<tr><td colspan='8'>No hay tickets disponibles.</td></tr>";
                         }
 

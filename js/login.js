@@ -1,20 +1,23 @@
+// Agrega un evento de 'submit' al formulario de inicio de sesión
 document.getElementById('login-form').addEventListener('submit', function(event) {
     event.preventDefault() // Evita el envío del formulario de la manera tradicional
     
+        // Obtener valores de los campos de entrada
     const nombreUsuario = document.getElementById('nombre-usuario').value
     const contrasena = document.getElementById('contrasena').value
 
+    // Realizar una solicitud POST a PHP para iniciar sesión
     fetch('/php/login.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
         body: new URLSearchParams({
-            'nombre-usuario': nombreUsuario,
-            'contrasena': contrasena
+            'nombre-usuario': nombreUsuario, // Parámetro del nombre de usuario
+            'contrasena': contrasena // Parámetro de la contraseña
         })
     })
-    .then(response => response.text())
+    .then(response => response.text()) // Procesar la respuesta como texto
     .then(data => {
         // Maneja la respuesta del servidor
         if (data.includes("Inicio de sesión exitoso")) {
@@ -25,7 +28,7 @@ document.getElementById('login-form').addEventListener('submit', function(event)
         }
     })
     .catch(error => {
-        console.error('Error:', error)
+        console.error('Error:', error) // Manejar errores de la solicitud
     })
 })
 
