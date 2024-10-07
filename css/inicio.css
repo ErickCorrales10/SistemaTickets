@@ -183,7 +183,27 @@
     background-color: #14c93e !important; /* Verde claro */
 }
 
+/*// ============================================================================================ */
+/*// ========================            Acción de los botones               ==================== */
+/*// ============================================================================================ */
+.contenedor-botones-accion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    justify-content: space-around;
+    gap: 10px;
+}
 
+.cambiar-estado {
+    color: white;
+    background-color: darkblue;
+}
+
+.ver-detalles {
+    color: black;
+    background-color: #20e83e;
+}
 
 /*// ============================================================================================ */
 /*// ========================                   Body                    ========================= */

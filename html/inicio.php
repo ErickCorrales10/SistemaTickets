@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,7 +40,7 @@
         <main class="main-principal" id="main-principal">
             <!-- Campo de búsqueda para encontrar tickets -->
             <div class="contenedor-buscar">
-                <input type="text" placeholder="Buscar ticket..." class="buscar-ticket"><br>
+                <input type="text" placeholder="Buscar ticket..." class="buscar-ticket" id="buscar-ticket"><br>
             </div>
 
             <!-- Cabecera principal con el título del sistema -->
@@ -67,6 +66,7 @@
                             <th>Fecha de Creación</th>
                             <th>Fecha de Finalización</th>
                             <th>Resuelto</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -118,6 +118,24 @@
                                         <td>" . htmlspecialchars($row['fecha_creacion']) . "</td>
                                         <td>" . htmlspecialchars($row['fecha_resolucion'] ?? '-') . "</td>
                                         <td>" . htmlspecialchars($row['resuelto'] ?? '-') . "</td>
+                                        <td> 
+                                            <div class='contenedor-botones-accion'>
+                                                <button type='button' class='ver-detalles' 
+                                                data-id='" . htmlspecialchars($row['id_ticket']) . "'
+                                                id='ver-detalles'
+                                                >Mostrar detalles</button>
+
+                                                <button class='cambiar-estado'>Cambiar estado</button>
+
+                                                <select class='select-estado' style='display: none;'>
+                                                    <option value='abierto'>Abierto</option>
+                                                    <option value='en progreso'>En Progreso</option>
+                                                    <option value='cerrado'>Cerrado</option>
+                                                </select>
+
+                                                <button class='guardar-estado' style='display: none;'>Guardar Estado</button>
+                                            </div>
+                                        </td>
                                         </tr>";
                             }
                         } else {

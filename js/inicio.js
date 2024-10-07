@@ -7,6 +7,10 @@ function comenzar() {
     funcionalidadBarra()
     mostrarTicketsFiltro()
     mostrarTodosTickets()
+    buscarTicket()
+    verDetalles()
+    guardarEstado()
+    cambiarEstado()
     cerrarSesion()
 }
 
@@ -88,6 +92,94 @@ function filtrarTickets(estado) {
             document.querySelector('.tabla-tickets tbody').innerHTML = data
         })
         .catch(error => console.error('Error;', error))
+}
+
+// Función para buscar un ticket en la tabla
+const buscarTicket = () => {
+    const buscarEntrada = document.getElementById('buscar-ticket')
+    const tablaTickets = document.querySelector('.tabla-tickets tbody')
+
+    // Función que filtra las filas de la tabla en base al texto ingresado
+    function filtrarTickets() {
+        const filtro = buscarEntrada.value.toLowerCase()
+        const filas = tablaTickets.getElementsByTagName('tr')
+
+        // Iterar sobre todas las filas de la tabla
+        for (let i = 0; i < filas.length; i++) {
+            const fila = filas[i]
+            // Convertir el contenido de las celdas de la fila en un solo string
+            const textoFila = fila.textContent.toLowerCase()
+
+            // Si el texto de la fila contiene el filtro, mostrar la fila, de lo contrario ocultarla
+            if (textoFila.includes(filtro)) {
+                fila.style.display = ''
+            } else {
+                fila.style.display = 'none'
+            }
+        }
+    }
+
+    buscarEntrada.addEventListener('keyup', filtrarTickets) // Evento asociado al presionar una tecla
+}
+
+const verDetalles = () => {
+    const botonesDetalles = document.querySelectorAll('.ver-detalles')
+    botonesDetalles.forEach(boton => {
+        boton.addEventListener('click', function () {
+            const id_ticket = this.getAttribute('data-id')
+            fetch('/php/detalle_ticket.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `id_ticket=${id_ticket}`
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data)
+            })
+            .catch(error => console.error('Error:', error))
+        })
+    })
+}
+
+
+const cambiarEstado = () => {
+    document.querySelectorAll('.cambiar-estado').forEach(button => {
+        button.addEventListener('click', () => {
+            const row = button.closest('tr'); // Encuentra la fila más cercana
+            const selectEstado = row.querySelector('.select-estado')
+            const guardarEstado = row.querySelector('.guardar-estado')
+
+            // Muestra el select y el botón guardar
+            selectEstado.style.display = 'block'
+            guardarEstado.style.backgroundColor = 'black'
+            guardarEstado.style.color = 'white'
+            guardarEstado.style.display = 'block'
+
+            // Oculta el botón de "Cambiar estado"
+            button.style.display = 'none'
+        })
+    })
+}
+
+const guardarEstado = () => {
+    document.querySelectorAll('.guardar-estado').forEach(button => {
+        button.addEventListener('click', () => {
+            const row = button.closest('tr') // Encuentra la fila más cercana
+            const id = row.querySelector('td:nth-child(2)').innerText // Extrae el ID del ticket de la segunda celda
+            const selectEstado = row.querySelector('.select-estado')
+            const nuevoEstado = selectEstado.value
+
+            // Muestra una alerta con el nuevo estado
+            alert(`El estado del ticket ${id} ha sido cambiado a: ${nuevoEstado}`)
+
+            // Oculta el select y el botón guardar, y muestra de nuevo el botón de cambiar estado
+            selectEstado.style.display = 'none'
+            button.style.display = 'none'
+            row.querySelector('.cambiar-estado').style.display = 'inline-block'
+        })
+    })
 }
 
 function cerrarSesion() {

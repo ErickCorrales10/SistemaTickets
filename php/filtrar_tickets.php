@@ -1,3 +1,4 @@
+
 <?php
     // Conectar a la base de datos
     $servername = "localhost";
@@ -52,6 +53,34 @@
                     <td>" . htmlspecialchars($row['fecha_creacion']) . "</td>
                     <td>" . htmlspecialchars($row['fecha_resolucion'] ?? '-') . "</td>
                     <td>" . htmlspecialchars($row['resuelto'] ?? '-') . "</td>
+                    <td> 
+                    <div class='contenedor-botones-accion'>
+                        <button type='button' class='ver-detalles' 
+                        data-id='" . htmlspecialchars($row['id_ticket']) . "'
+                        id='ver-detalles'
+                        >Mostrar detalles</button>
+
+                        <button class='cambiar-estado'
+                        onclick='
+                            this.style.display=\"none\"; 
+                            var row = this.closest(\"tr\"); 
+                            var selectEstado = row.querySelector(\".select-estado\"); 
+                            var guardarEstado = row.querySelector(\".guardar-estado\"); 
+                            selectEstado.style.display=\"block\"; 
+                            guardarEstado.style.display=\"block\"; 
+                            guardarEstado.style.backgroundColor=\"black\"; 
+                            guardarEstado.style.color=\"white\";
+                        '>Cambiar estado</button>
+
+                        <select class='select-estado' style='display: none;'>
+                            <option value='abierto'>Abierto</option>
+                            <option value='en progreso'>En Progreso</option>
+                            <option value='cerrado'>Cerrado</option>
+                        </select>
+
+                        <button class='guardar-estado' style='display: none;'>Guardar Estado</button>
+                    </div>
+                </td>
                 </tr>";
         }
     } else {
