@@ -5,10 +5,10 @@ document.addEventListener('DOMContentLoaded', comenzar, false)
 function comenzar() {
         // Llamada a las funciones principales de la página
     funcionalidadBarra()
-    mostrarTicketsFiltro()
-    mostrarTodosTickets()
-    buscarTicket()
     verDetalles()
+    mostrarTicketsFiltro()
+    // mostrarTodosTickets()
+    buscarTicket()
     guardarEstado()
     cambiarEstado()
     cerrarSesion()
@@ -49,6 +49,7 @@ function mostrarTicketsFiltro() {
     let ticketsEnProgreso = document.getElementById('tickets-en-progreso')
     let ticketsAbiertos = document.getElementById('tickets-abiertos')
     let ticketsCerrados = document.getElementById('tickets-cerrados')
+    let mostrarTodosTickets = document.getElementById('mostrar-todos')
 
         // Agregar evento de clic para mostrar solo tickets "En Progreso"
     ticketsEnProgreso.addEventListener('click', function () {
@@ -64,9 +65,14 @@ function mostrarTicketsFiltro() {
     ticketsCerrados.addEventListener('click', function () {
         filtrarTickets('Cerrado')
     })
+
+        // Agregar evento de clic para mostrar todos los tickets
+    mostrarTodosTickets.addEventListener('click', function () {
+        filtrarTickets('todos')
+    })
 }
 
-function mostrarTodosTickets() {
+/* function mostrarTodosTickets() {
         // Obtener el botón para mostrar todos los tickets
     const mostrarTickets = document.getElementById('mostrar-todos')
 
@@ -81,7 +87,7 @@ function mostrarTodosTickets() {
             })
             .catch(error => console.error('Error;', error))
     })
-}
+} */
 
 function filtrarTickets(estado) {
     // Realizar una petición a PHP para filtrar los tickets por estado
@@ -149,13 +155,11 @@ const cambiarEstado = () => {
         button.addEventListener('click', () => {
             const row = button.closest('tr'); // Encuentra la fila más cercana
             const selectEstado = row.querySelector('.select-estado')
-            const guardarEstado = row.querySelector('.guardar-estado')
+            const selectResolucion = row.querySelector('.select-resolucion')
 
             // Muestra el select y el botón guardar
             selectEstado.style.display = 'block'
-            guardarEstado.style.backgroundColor = 'black'
-            guardarEstado.style.color = 'white'
-            guardarEstado.style.display = 'block'
+            selectResolucion.style.display = 'block'
 
             // Oculta el botón de "Cambiar estado"
             button.style.display = 'none'
@@ -170,14 +174,17 @@ const guardarEstado = () => {
             const id = row.querySelector('td:nth-child(2)').innerText // Extrae el ID del ticket de la segunda celda
             const selectEstado = row.querySelector('.select-estado')
             const nuevoEstado = selectEstado.value
+            const selectResolucion = row.querySelector('.select-resolucion')
+            button.style.display = 'block'
 
-            // Muestra una alerta con el nuevo estado
-            alert(`El estado del ticket ${id} ha sido cambiado a: ${nuevoEstado}`)
+            
 
             // Oculta el select y el botón guardar, y muestra de nuevo el botón de cambiar estado
-            selectEstado.style.display = 'none'
-            button.style.display = 'none'
-            row.querySelector('.cambiar-estado').style.display = 'inline-block'
+            // selectEstado.style.display = 'none'
+            selectResolucion.style.display = 'block'
+            // row.querySelector('.cambiar-estado').style.display = 'inline-block'
+
+
         })
     })
 }
@@ -194,3 +201,17 @@ function cerrarSesion() {
 
     })
 }
+
+/* // Muestra una alerta con el nuevo estado
+fetch('/php/cambiar_estado.php', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: `id_ticket=${id}&nuevo_estado=${nuevoEstado}`
+})
+.then(response => response.text())
+.then(data => {
+    alert(data)
+})
+.catch(error => console.error('Error:', error)) */

@@ -44,8 +44,10 @@
                 $clase = "cerrado-si";
             }
 
+            $id_ticket = htmlspecialchars($row['id_ticket']);
+
             echo "<tr class='" . htmlspecialchars($clase) . "'>
-                    <td>" . htmlspecialchars($row['nombre_cliente']) . "</td>
+                    <td>" . htmlspecialchars($row['nombre_cliente']) . "l</td>
                     <td>" . htmlspecialchars($row['id_ticket']) . "</td>
                     <td>" . htmlspecialchars($row['asunto']) . "</td>
                     <td>" . htmlspecialchars($row['descripcion']) . "</td>
@@ -58,6 +60,19 @@
                         <button type='button' class='ver-detalles' 
                         data-id='" . htmlspecialchars($row['id_ticket']) . "'
                         id='ver-detalles'
+                        onclick='
+                                fetch(\"/php/detalle_ticket.php\", {
+                                method: \"POST\",
+                                headers: {
+                                    \"Content-Type\": \"application/x-www-form-urlencoded\"
+                                },
+                                body: \"id_ticket=$id_ticket\"
+                            })
+                            .then(response => response.text())
+                            .then(data => {
+                                alert(data)
+                            })
+                            .catch(error => console.error(\"Error:\", error))'
                         >Mostrar detalles</button>
 
                         <button class='cambiar-estado'

@@ -133,6 +133,11 @@
                                                     <option value='cerrado'>Cerrado</option>
                                                 </select>
 
+                                                <select class='select-resolucion' style='display: none;'>
+                                                    <option value='no'>NO</option>
+                                                    <option value='si'>SI</option>
+                                                </select>
+
                                                 <button class='guardar-estado' style='display: none;'>Guardar Estado</button>
                                             </div>
                                         </td>
