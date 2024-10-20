@@ -7,9 +7,7 @@ function comenzar() {
     funcionalidadBarra()
     verDetalles()
     mostrarTicketsFiltro()
-    // mostrarTodosTickets()
     buscarTicket()
-    guardarEstado()
     cambiarEstado()
     cerrarSesion()
 }
@@ -149,44 +147,66 @@ const verDetalles = () => {
     })
 }
 
-
 const cambiarEstado = () => {
     document.querySelectorAll('.cambiar-estado').forEach(button => {
         button.addEventListener('click', () => {
             const row = button.closest('tr'); // Encuentra la fila más cercana
             const selectEstado = row.querySelector('.select-estado')
             const selectResolucion = row.querySelector('.select-resolucion')
+            const botonGuardarEstado = row.querySelector('.guardar-estado')
 
             // Muestra el select y el botón guardar
             selectEstado.style.display = 'block'
             selectResolucion.style.display = 'block'
+            botonGuardarEstado.style.display = 'block'
 
             // Oculta el botón de "Cambiar estado"
             button.style.display = 'none'
+
+            botonGuardarEstado.addEventListener('click', () => {
+                guardarEstado(row, selectEstado, selectResolucion, button, botonGuardarEstado)
+            }, {once: true})
         })
     })
 }
 
-const guardarEstado = () => {
-    document.querySelectorAll('.guardar-estado').forEach(button => {
-        button.addEventListener('click', () => {
-            const row = button.closest('tr') // Encuentra la fila más cercana
-            const id = row.querySelector('td:nth-child(2)').innerText // Extrae el ID del ticket de la segunda celda
-            const selectEstado = row.querySelector('.select-estado')
-            const nuevoEstado = selectEstado.value
-            const selectResolucion = row.querySelector('.select-resolucion')
-            button.style.display = 'block'
+const guardarEstado = (row, selectEstado, selectResolucion, button, botonGuardarEstado) => {
+    const idTicket = row.querySelector('td:nth-child(2)').innerText; // ID del ticket (asumiendo que está en la segunda celda)
+    const nuevoEstado = selectEstado.value; // Estado seleccionado
+    const nuevaResolucion = selectResolucion.value; // Resolución seleccionada
 
-            
+    console.log(nuevoEstado)
+    console.log(nuevaResolucion)
 
-            // Oculta el select y el botón guardar, y muestra de nuevo el botón de cambiar estado
-            // selectEstado.style.display = 'none'
-            selectResolucion.style.display = 'block'
-            // row.querySelector('.cambiar-estado').style.display = 'inline-block'
-
-
-        })
+    // Enviar los datos al archivo cambiar_estado.php
+    fetch('/php/cambiar_estado.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: `id_ticket=${idTicket}&nuevo_estado=${nuevoEstado}&nueva_resolucion=${nuevaResolucion}`
     })
+    .then(response => response.json())
+    .then(data => {
+        // Si deseas realizar alguna acción con la respuesta del servidor
+        console.log('Respuesta del servidor:', data)
+
+        if(data.success){
+            window.location.reload()
+        }
+        else{
+            alert('Hubo un error al cambiar el estado del ticket.')
+        }
+    })
+    .catch(error => console.error('Error:', error))
+
+    // Ocultar el select y el botón guardar después de enviar los datos
+    selectEstado.style.display = 'none';
+    selectResolucion.style.display = 'none';
+    botonGuardarEstado.style.display = 'none';
+
+    // Volver a mostrar el botón "Cambiar estado"
+    button.style.display = 'block';
 }
 
 function cerrarSesion() {

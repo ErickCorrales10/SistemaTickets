@@ -10,54 +10,35 @@
 
     // Verificar la conexión
     if ($conn->connect_error) {
-        die("Conexión fallida: " . $conn->connect_error);
+        echo json_encode(['success' => false, 'message' => "Conexión fallida: " . $conn->connect_error]);
+        exit();
     }
 
     // Obtener el valor del filtro desde la URL
     $id_ticket = $_POST['id_ticket'] ?? '';
     $nuevo_estado = $_POST['nuevo_estado'] ?? '';
+    $nueva_resolucion = $_POST['nueva_resolucion'] ?? '';
 
-    // echo "El valor obtenido es: " . htmlspecialchars($id_ticket);
-
-    if(!empty($id_ticket) && is_numeric($id_ticket) && !empty($nuevo_estado)) {
+    if(!empty($id_ticket) && is_numeric($id_ticket) && !empty($nuevo_estado) && !empty($nueva_resolucion)) {
         $sql = "UPDATE tickets
-        SET estado = ?
+        SET estado = ?, resuelto = ?
         WHERE id_ticket = ?";
 
         // Usar prepared statements para evitar inyección SQL
         $stmt = $conn->prepare($sql);
 
-        if($stmt === false)
-            die("Error preparando la consulta: ". $conn->error);
-
-        $stmt->bind_param("si", $nuevo_estado, $id_ticket);  // 'i' es para enteros
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo "Nombre del Cliente: " . htmlspecialchars($row['nombre_cliente']) . "\n";
-                echo "ID del Ticket: " . htmlspecialchars($row['id_ticket']) . "\n";
-                echo "Asunto: " . htmlspecialchars($row['asunto']) . "\n";
-                echo "Descripción: " . htmlspecialchars($row['descripcion']) . "\n";
-                echo "Estado: " . htmlspecialchars($row['estado']) . "\n";
-                echo "Fecha de Creación: " . htmlspecialchars($row['fecha_creacion']) . "\n";
-                echo "Fecha de Resolución: " . htmlspecialchars($row['fecha_resolucion'] ?? '-') . "\n";
-                echo "Resuelto: " . htmlspecialchars($row['resuelto'] ?? '-') . "\n";
-                echo "Email: " . htmlspecialchars($row['email']). "\n";
-                echo "ID del Cliente: " . htmlspecialchars($row['id_cliente']). "\n";
-                echo "Teléfono: " . htmlspecialchars($row['telefono']). "\n";
-                echo "ID de Asignación: " . htmlspecialchars($row['id_asignacion']). "\n";
-                echo "Asignado a: " . htmlspecialchars($row['asignado_a']). "\n";
-                echo "Departamento: " . htmlspecialchars($row['departamento']). "\n";
-                echo "ID de Nota: " . htmlspecialchars($row['id_nota']). "\n";
-                echo "Comentario: " . htmlspecialchars($row['comentario']). "\n";
-            }
-        } else {
-            echo "No se encontraron detalles para el ticket con ID: " . htmlspecialchars($id_ticket);
+        if($stmt === false) {
+            echo json_encode(['success' => false, 'message' => "Error preparando la consulta: " . $conn->error]);
+            exit();
         }
+
+        $stmt->bind_param("ssi", $nuevo_estado, $nueva_resolucion, $id_ticket);  // sis = 's' para string,'i' es para enteros, 's' para string
+        if ($stmt->execute())
+            echo json_encode(['success' => true, 'message' => "Estado del ticket actualizado exitosamente"]);
+        else
+            echo json_encode(['success' => false, 'message' => "Error al actualizar el ticket: ". $stmt->error]);
     } else {
-        echo "ID de ticket inválido.";
+        echo json_encode(['success' => false, 'message' => "ID de ticket inválido o estado vacío"]);
     }
 
     // Cerrar la conexión
