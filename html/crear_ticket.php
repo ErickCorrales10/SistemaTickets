@@ -28,6 +28,16 @@
 </head>
 <body>
 
+    <!-- Verificamos si hay una sesión activa -->
+    <?php
+        session_start();
+
+        if (!isset($_SESSION['usuario'])) {
+            header('Location: login.html'); // Redirigimos a la página de inicio
+            exit(); // Salimos de la página
+        }
+    ?>
+
     <div class="contenedor-principal" id="contenedor-principal"> 
         <!-- Contenedor principal con los tickets -->
         <main class="main-principal" id="main-principal">
@@ -86,8 +96,19 @@
                     <div class="seccion" id="asignacion-seguimiento">
                         <h1>Asignación y Seguimiento</h1>
                         <div class="campo">
-                            <input type="text" name="asignado" placeholder="Asginado a ...">
-                            <input type="text" name="departamento" placeholder="Departamento">
+                            <select name="asignado" required>
+                                <option value="" disabled selected>Seleccione un técnico</option>
+                                <option value="erick">Erick Corrales</option>
+                                <option value="luis">Luis Gutierrez</option>
+                            </select>
+                            <select name="departamento" required>
+                                <option value="" disabled selected>Seleccione un departamento</option>
+                                <option value="mantenimiento">Mantenimiento</option>
+                                <option value="soporte">Soporte</option>
+                                <option value="redes">Redes</option>
+                                <option value="seguridad">Seguridad Informática</option>
+                                <option value="basedatos">Base de Datos</option>
+                            </select>
                         </div>
                     </div>
                     <div class="seccion" id="notas-internas">

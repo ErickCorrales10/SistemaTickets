@@ -18,6 +18,6 @@
     session_destroy();
 
     // Redirigir a la página de inicio de sesión u otra página
-    header("Location: /html/login.php");
+    header("Location: /html/login.html");
     exit();
 ?>

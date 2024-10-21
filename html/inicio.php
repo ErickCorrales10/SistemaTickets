@@ -14,6 +14,15 @@
 </head>
 <body>
 
+    <?php
+        session_start();
+
+        if(!isset($_SESSION['usuario'])) {
+            header("Location: login.html");
+            exit();
+        }
+    ?>
+
     <!-- Barra de navegación -->
     <div class="barra-lateral" id="barra-lateral">
         <div class="contenedor-barra-lateral" id="contenedor-barra-lateral">
@@ -24,7 +33,7 @@
             <!-- Menú de navegación en la barra lateral -->
             <ul class="menu-lateral">
                 <!-- Enlaces a diferentes secciones del sistema -->
-                <li><a href="crear_ticket.html" class="menu-opcion">Crear Ticket</a></li>
+                <li><a href="crear_ticket.php" class="menu-opcion">Crear Ticket</a></li>
                 <li><a href="#" class="menu-opcion" id="mostrar-todos">Mostrar Todos</a></li>
                 <li><a href="#" class="menu-opcion" id="tickets-en-progreso">Tickets en Progreso</a></li>
                 <li><a href="#" class="menu-opcion" id="tickets-abiertos">Tickets Abiertos</a></li>

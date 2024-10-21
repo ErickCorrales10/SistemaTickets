@@ -217,7 +217,7 @@ function cerrarSesion() {
     cerrarSesion.addEventListener('click', function(event) {
         event.preventDefault() // Evita que el enlace redirija inmediatamente
 
-        window.location.href = 'login.html' // Redirigir al usuario a la página de login
+        window.location.href = '/php/cerrar_sesion.php' // Redirigir al script de cerrar sesion
 
     })
 }
